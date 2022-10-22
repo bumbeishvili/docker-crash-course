@@ -5,11 +5,16 @@ FROM node:17-alpine
 # Setting work dir
 WORKDIR /app
 
-# copy source from . to workDir
-COPY . .
+# Copy package json first, so that we can cache installed packages later
+COPY package.json .
 
 # install dependencies in copied root directory
 RUN npm install
+
+# copy source from . to workDir
+COPY . .
+
+
 
 
 # Expose port (written in API).
@@ -27,8 +32,17 @@ CMD ["node", "app.js"]
 docker build -t myapp .
 
 
+# list all used containers (add -a flag for all)
+docker ps
+
+# list all images
+docker images
+
 # For starting Docker Container
 
 # For stopping docker container
 docker stop ContainerName
+
+
+
 ```
