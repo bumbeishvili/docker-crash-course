@@ -28,7 +28,8 @@ CMD ["node", "app.js"]
 ```
 
 ```bash
-# For running this file use command (. means docker file is in the same folder)
+# For running this file use command (. means docker file is in the same folder)/
+# We can add :tag to name - `docker build -t myapp:v1 .`
 docker build -t myapp .
 
 
@@ -44,7 +45,9 @@ docker rm ImageName
 # Remove container (we can remove multiple, by appending `docker container rm name1 name2`)
 docker container rm ContainerName
 
-# For starting Docker Container
+# For starting/running Docker Container
+docker run --name ContainerName -p 4000:4000 ImageName:TagName
+
 
 # For stopping docker container
 docker stop ContainerName
