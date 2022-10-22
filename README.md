@@ -38,10 +38,20 @@ docker ps
 # list all images
 docker images
 
+# Remove image.  (add -f to force deletion)
+docker rm ImageName
+
+# Remove container (we can remove multiple, by appending `docker container rm name1 name2`)
+docker container rm ContainerName
+
 # For starting Docker Container
 
 # For stopping docker container
 docker stop ContainerName
+
+
+# removes all containers, all images and volumes
+docker system prune -a
 
 
 
