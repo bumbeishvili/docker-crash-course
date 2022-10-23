@@ -2,6 +2,8 @@
 # Setting root
 FROM node:17-alpine  
 
+RUN npm install -g nodemon
+
 # Setting work dir
 WORKDIR /app
 
@@ -21,7 +23,7 @@ COPY . .
 EXPOSE 4000
 
 # Run command at runtime [when containers start working]
-CMD ["node", "app.js"]
+CMD ["npm","run","dev"]
 
 
 
@@ -45,9 +47,13 @@ docker rm ImageName
 # Remove container (we can remove multiple, by appending `docker container rm name1 name2`)
 docker container rm ContainerName
 
-# For starting/running Docker Container
-docker run --name ContainerName -p 4000:4000 ImageName:TagName
+# For creating/running Docker Container. (--rm means remove once not used)
+# we can add -v flag for adding volumes, in order container to react on changes. Need an absolute path and app path `-v ABSOLUTE_PATH:DockerWorkDirPath`
+# We need to run npm install locally before
+docker run --name ContainerName -p 4000:4000 --rm ImageName:TagName 
 
+# For starting created container
+docker start ContainerName
 
 # For stopping docker container
 docker stop ContainerName
@@ -56,6 +62,31 @@ docker stop ContainerName
 # removes all containers, all images and volumes
 docker system prune -a
 
+
+
+```
+
+```yaml
+version: "3.8"
+services: 
+  api:
+    build:  ./api
+    container_name: api_c
+    ports: 
+      - '4000:4000'
+    volumes:  #For hot reloade
+      - ./api:/app
+      - ./app/node_modules  # making sure node moduels won't get deleted
+
+```
+
+```bash
+# start & generate docker images and components
+docker-compose up
+
+
+# stop 
+docker-compose down
 
 
 ```
