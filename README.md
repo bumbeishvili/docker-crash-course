@@ -77,7 +77,14 @@ services:
     volumes:  #For hot reloade
       - ./api:/app
       - ./app/node_modules  # making sure node moduels won't get deleted
-
+  frontend:
+    build: ./pathToSampleReactApp
+    container_name: /frontend_c
+    ports:
+      - '3000:3000'
+    volumes:  #For hot reloade
+      - ./pathToSampleReactApp:/app
+      - ./app/node_modules  # making sure node moduels won't get deleted
 ```
 
 ```bash
