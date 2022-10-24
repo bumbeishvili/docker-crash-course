@@ -62,6 +62,8 @@ docker stop ContainerName
 # removes all containers, all images and volumes
 docker system prune -a
 
+killall Docker && open /Applications/Docker.app
+docker-compose down
 
 
 ```
